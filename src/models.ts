@@ -9,10 +9,11 @@ export interface ProcessedRoutes {
     [key: string]: ProcessedRouteObject
 }
 
-interface ProcessedRouteObject {
+export interface ProcessedRouteObject {
     path: string
     component: object
     pathRegex: RegExp
     dynamicSegments: Key[]
 }
 
+export class NavigationError extends Error {}

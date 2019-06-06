@@ -1,5 +1,3 @@
-import { initRouter } from './router';
+import { install } from './install';
 
-export default {
-    initRouter,
-};
+export default install;

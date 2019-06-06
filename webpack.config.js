@@ -14,9 +14,13 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
+    externals: {
+        vue: "vue"
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'yet-another-vue-router.js',
-        library: 'yet-another-vue-router'
+        // TODO cg use hyphenated name
+        library: 'vuerouter'
     }
 };
