@@ -2,7 +2,7 @@
   "name": "yet-another-vue-router",
   "version": "1.0.0",
   "description": "Custom implementation of routing in Vue",
-  "main": "./src/index.ts",
+  "main": "dist/router.js",
   "scripts": {
     "build": "webpack",
     "test": "jest"

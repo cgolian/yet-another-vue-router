@@ -1,3 +1,5 @@
 import { install } from './install';
 
-export default install;
+export const RouterPlugin = {
+    install
+};

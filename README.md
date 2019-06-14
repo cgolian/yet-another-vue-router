@@ -1,6 +1,6 @@
 # Yet Another Vue Router #  
 
-In order to understand how routing in single page applications works I tried to write a Vue router from scratch.  
+In order to understand how routing in single page applications works `yet-another-vue-router` router was written.  
 
 ## Usage ##  
 ### Static Routing ###  

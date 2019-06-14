@@ -11,7 +11,7 @@ export interface ProcessedRoutes {
 
 export interface ProcessedRouteObject {
     path: string
-    component: object
+    component: any
     pathRegex: RegExp
     dynamicSegments: Key[]
 }

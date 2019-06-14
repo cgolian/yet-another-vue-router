@@ -3,9 +3,8 @@ import { Key } from 'path-to-regexp';
 
 import { NavigationError, ProcessedRouteObject, ProcessedRoutes, RouteObject } from './models';
 
-export function matchCurrentView(processedRoutes: ProcessedRoutes) : object {
+export function matchCurrentView(processedRoutes: ProcessedRoutes) {
     const currentPath = window.location.pathname;
-
     for (let key in processedRoutes) {
         const routeObject: ProcessedRouteObject = processedRoutes[key];
         if (routeObject.pathRegex.test(currentPath)) {

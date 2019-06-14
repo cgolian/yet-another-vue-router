@@ -1,4 +1,4 @@
-import { matchCurrentView, processRoutes } from '../src/router';
+import { matchCurrentView, processRoutes } from '../src/routing';
 import { ProcessedRoutes, RouteObject } from '../src/models';
 
 test('Should process static route.', () => {

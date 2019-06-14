@@ -19,8 +19,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'yet-another-vue-router.js',
-        // TODO cg use hyphenated name
-        library: 'vuerouter'
+        filename: 'router.js',
+        library: 'vuerouter',
+        libraryTarget: "umd"
     }
 };
