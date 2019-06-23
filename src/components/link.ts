@@ -10,9 +10,7 @@ export function initRouterLink(Vue: VueConstructor) {
         methods: {
             navigate: function (event: Event) {
                 event.preventDefault();
-                // title can stay empty - FF currently ignores this parameter
-                const state = history.state;
-                history.pushState(state, '', this.to);
+                this.$router.navigate(this.to);
             }
         },
         render(h: CreateElement) {

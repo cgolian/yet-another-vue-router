@@ -6,9 +6,11 @@ In order to understand how routing in single page applications works `yet-anothe
 ### Static Routing ###  
 ```
 // interface to be used when declaring routes
-interface RouteObject {
+interface RouteDefinition {
     path: string
     component: object  
+    beforeEnter?: (from: Route, to: Route, next: Function) => void
+    beforeLeave?: (from: Route, to: Route, next: Function) => void
 }  
 
 <div id="app">
@@ -22,7 +24,7 @@ const FooComponent = { template: `<div>foo</div>`};
 const BarComponent = { template: `<div>bar</div>`}; 
 
 // you can declare your routes similary as done here:  
-const routes: RouteObject[] = [
+const routes: RouteDefinition[] = [
     {
         path: '/foo',
         component: FooComponent
@@ -44,10 +46,51 @@ const app = new Vue({
 ```  
 
 ### Dynamic Routing ###  
-TODO 
+Dynamic parts of path are passed into the component as props.
+```
+const routes = [
+  {
+    path: '/foo/:username',
+    component: Foo,
+  },
+];
+...
+export default {
+    name: 'Foo',
+    props: ['username'],
+}
+```
 ### Route guards ###  
-TODO    
+Two guards are available: beforeEnter and beforeLeave.  
+Example usage can be seen below:  
+```
+const routes: RouteDefinition[] = [
+    {
+        path: '/foo',
+        component: FooComponent
+        beforeLeave: (from, to, next) => {
+            if (to.path === '/bar') {
+                alert('You can not navigate from /foo to /bar.');
+                next(false)
+            }
+        }
+    },  
+    {
+        path: '/bar',
+        component: BarComponent
+        beforeEnter: (from, to, next) => {
+            if (from.path === '/foo') {
+                alert('You can not navigate from /foo to /bar.');
+                next(false);
+            }
+        }
+    }
+];  
+
+```  
 ### Programmatic navigation ###  
+```
+this.$router.navigate('/foo');
+```
+### Named Views ###
 TODO
-## Installation ##  
-TODO  
