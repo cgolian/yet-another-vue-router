@@ -6,7 +6,7 @@ import {
     ProcessedRouteObject,
     ProcessedRoutes,
     Route,
-    RouteDefinition,
+    RouteDefinition, RouteDefinitionError,
     RouteMap
 } from '../models/models';
 
@@ -17,13 +17,17 @@ export function matchPathToComponent(currentPath: string, processedRoutes: Proce
             return routeObject;
         }
     }
-    throw new NavigationError(`Could not match any component for route: ${currentPath}`);
+    throw new NavigationError(`Could not match any component for route: ${currentPath}.`);
 }
 
 export function processRoutes(routes: RouteDefinition[]) : ProcessedRoutes {
     const processedRoutes: ProcessedRoutes = {};
     routes.forEach((route: RouteDefinition) => {
         const dynamicSegments: Key[] = [];
+        if (route.components && route.component) {
+            throw new RouteDefinitionError("Route definition can contain either 'component' " +
+                "field or 'components' but not both.")
+        }
         const pathRegex = pathToRegexp(route.path, dynamicSegments);
         processedRoutes[route.path] = {
             path: route.path,
@@ -32,6 +36,7 @@ export function processRoutes(routes: RouteDefinition[]) : ProcessedRoutes {
             beforeLeave: route.beforeLeave,
             pathRegex,
             dynamicSegments,
+            components: route.components
         };
     });
     return processedRoutes;
@@ -44,8 +49,6 @@ export function checkRouteGuards(from: Route, to: Route) : boolean {
             routeGuardsPassed = false;
         }
     };
-    console.log(`fromRoute: ${from.path}`);
-    console.log(`toRoute: ${to.path}`);
     if (from.beforeLeave) {
         from.beforeLeave(from, to, nextFunction);
     }

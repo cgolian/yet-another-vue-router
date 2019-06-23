@@ -14,7 +14,7 @@ interface RouteDefinition {
 }  
 
 <div id="app">
-  <yet-another-router-outlet></yet-another-router-outlet>  
+  <yet-another-router-view>  
   <yet-another-router-link to="foo"></yet-another-router-link>
   <yet-another-router-link to="bar"></yet-another-router-link>
 </div>
@@ -93,4 +93,20 @@ const routes: RouteDefinition[] = [
 this.$router.navigate('/foo');
 ```
 ### Named Views ###
-TODO
+You can declare named views as in example below:  
+```
+const routes: RouteDefinition[] = [
+    {
+        path: '/foo',
+        components: {
+            default: Foo
+            side: Bar
+        }
+    },  
+];  
+```  
+and use them in a following way:  
+```
+<yet-another-router-view></yet-another-router-view>
+<yet-another-router-view name="side"></yet-another-router-view>
+```

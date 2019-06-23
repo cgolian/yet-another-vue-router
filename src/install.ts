@@ -1,4 +1,10 @@
-import { checkRouteGuards, createRoute, mapDynamicSegments, matchPathToComponent, processRoutes } from './util/routing';
+import {
+    checkRouteGuards,
+    createRoute,
+    mapDynamicSegments,
+    matchPathToComponent,
+    processRoutes
+} from './util/routing';
 import { initRouterView, initRouterLink } from './components';
 import { RouteDefinition } from './models/models';
 
@@ -8,6 +14,7 @@ export function install(Vue: any, options: { routes: RouteDefinition[] }) {
     const initialRouterView = matchPathToComponent(window.location.pathname, processedRoutes);
     const initRoute = mapDynamicSegments(
         initialRouterView.pathRegex, window.location.pathname, initialRouterView.dynamicSegments);
+
     const router = new Vue({
         data: {
             routerView: initialRouterView,

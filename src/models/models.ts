@@ -13,12 +13,18 @@ export interface Route {
 // used by user to declare route guards
 type RouteGuard = (from: Route, to: Route, next: Function) => void
 
+// used with multiple router views - mapping component to a view
+interface ComponentViewsMap {
+    [key: string]: object
+}
+
 // used by user to declare routes
 export interface RouteDefinition {
     path: string
     component: object
     beforeEnter?: RouteGuard
     beforeLeave?: RouteGuard
+    components?: ComponentViewsMap
 }
 
 // map of path params with their values
@@ -39,7 +45,11 @@ export interface ProcessedRouteObject {
     dynamicSegments: Key[]
     beforeEnter?: RouteGuard
     beforeLeave?: RouteGuard
+    components?: ComponentViewsMap
 }
 
 // thrown when no component could be matched
 export class NavigationError extends Error {}
+
+// thrown when route was declared incorrectly
+export class RouteDefinitionError extends Error {}
